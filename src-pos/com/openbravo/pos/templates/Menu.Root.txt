@@ -80,6 +80,12 @@
 //        submenu.addTitle("Menu.Maintenance.ERP");
 //        submenu.addExecution("/com/openbravo/images/openbravo.png", "Menu.ERPProducts", "com.openbravo.possync.ProductsSyncCreate");
 //        submenu.addExecution("/com/openbravo/images/openbravo.png", "Menu.ERPOrders", "com.openbravo.possync.OrdersSyncCreate");
+    submenu.addTitle("Menu.Maintenance.ERP");
+    submenu.addPanel("/com/openbravo/images/package_settings.png", "Menu.ConfigureERP", "com.openbravo.sync.panel.ConfigureERP");
+    submenu.addPanel("/com/openbravo/images/list.png", "Menu.PreviewSync", "com.openbravo.sync.panel.Preview");
+    submenu.addExecution("/com/openbravo/images/agt_reload.png", "Menu.ERPProducts", "com.openbravo.sync.process.ProductsSyncCreate");
+    submenu.addExecution("/com/openbravo/images/agt_reload.png", "Menu.ERPOrders", "com.openbravo.sync.process.OrdersSyncCreate");
+
     group = menu.addGroup("Menu.System");
     group.addChangePasswordAction();
     group.addPanel("/com/openbravo/images/package_settings.png", "Menu.Configuration", "com.openbravo.pos.config.JPanelConfiguration");

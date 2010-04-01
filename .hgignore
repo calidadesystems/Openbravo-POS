@@ -1,2 +1,6 @@
 build.properties
 sampledb/derby/openbravopos-database/tmp
+build
+nbproject
+dist
+manifest.mf
