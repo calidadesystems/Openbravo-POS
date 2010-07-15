@@ -359,6 +359,20 @@ var bbdd = parts[1];
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
+      <field>
+        <name>TAXES_VALIDFROM</name>
+        <xpath>validFrom</xpath>
+        <element_type>node</element_type>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
     </fields>
     <limit>0</limit>
     <loopxpath>&#47;Openbravo&#47;Tax</loopxpath>
@@ -392,6 +406,7 @@ if (TAXES_RATE.getString() != null) {
    var TAX_RATE_CONVERT = str2num(TAXES_RATE.getString(), &quot;0.00&quot;, &quot;EN&quot;) &#47; 100;
 }
 
+var TAX_VALIDFROM_DATE= new Date(TAXES_VALIDFROM.getInteger());
 
 
 </jsScript_script>
@@ -443,6 +458,12 @@ Alert(str2);</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>TAX_RATE_CONVERT</name>
         <rename>TAX_RATE_CONVERT</rename>
         <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>TAX_VALIDFROM_DATE</name>
+        <rename>TAX_VALIDFROM_DATE</rename>
+        <type>Date</type>
         <length>-1</length>
         <precision>-1</precision>
         <replace>N</replace>
@@ -570,6 +591,11 @@ Alert(str2);</jsScript_script>
         <rename>TAXES_RATEORDER</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>VALIDFROM</name>
+        <rename>TAX_VALIDFROM_DATE</rename>
+        <update>Y</update>
+      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -639,6 +665,11 @@ Alert(str2);</jsScript_script>
       <value>
         <name>RATECASCADE</name>
         <rename>TAXES_CASCADE</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>VALIDFROM</name>
+        <rename>TAX_VALIDFROM_DATE</rename>
         <update>Y</update>
       </value>
     </lookup>
