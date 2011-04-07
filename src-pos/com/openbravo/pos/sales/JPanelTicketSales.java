@@ -49,15 +49,11 @@ public class JPanelTicketSales extends JPanelTicket {
     }
     
     protected Component getSouthComponent() {
-        m_cat = new JCatalog(dlSales,
-                "true".equals(m_jbtnconfig.getProperty("pricevisible")),
-                "true".equals(m_jbtnconfig.getProperty("taxesincluded")),
-                Integer.parseInt(m_jbtnconfig.getProperty("img-width", "64")),
-                Integer.parseInt(m_jbtnconfig.getProperty("img-height", "54")));
+        m_cat = new JCatalog(dlSales, panelconfig);
         m_cat.addActionListener(new CatalogListener());
         m_cat.getComponent().setPreferredSize(new Dimension(
                 0,
-                Integer.parseInt(m_jbtnconfig.getProperty("cat-height", "245"))));
+                Integer.parseInt(panelconfig.getProperty("cat-height", "245"))));
         return m_cat.getComponent();
     }
 

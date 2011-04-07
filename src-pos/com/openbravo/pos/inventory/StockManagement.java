@@ -37,6 +37,7 @@ import com.openbravo.pos.catalog.JCatalog;
 import com.openbravo.pos.printer.TicketParser;
 import com.openbravo.pos.printer.TicketPrinterException;
 import com.openbravo.pos.sales.JProductAttEdit;
+import com.openbravo.pos.sales.PropertiesConfig;
 import com.openbravo.pos.scanpal2.DeviceScanner;
 import com.openbravo.pos.scanpal2.DeviceScannerException;
 import com.openbravo.pos.scanpal2.ProductDownloaded;
@@ -97,8 +98,8 @@ public class StockManagement extends JPanel implements JPanelView {
         m_ReasonModel.add(MovementReason.OUT_CROSSING);        
         
         m_jreason.setModel(m_ReasonModel);
-        
-        m_cat = new JCatalog(m_dlSales);
+
+        m_cat = new JCatalog(m_dlSales, new PropertiesConfig(m_dlSystem.getResourceAsXML("Ticket.Buttons")));
         m_cat.getComponent().setPreferredSize(new Dimension(0, 245));
         m_cat.addActionListener(new CatalogListener());
         catcontainer.add(m_cat.getComponent(), BorderLayout.CENTER);

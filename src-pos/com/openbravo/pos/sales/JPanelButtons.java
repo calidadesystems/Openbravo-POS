@@ -40,18 +40,16 @@ import com.openbravo.pos.forms.AppUser;
 import com.openbravo.pos.util.ThumbNailBuilder;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
 public class JPanelButtons extends javax.swing.JPanel {
 
-    private static Logger logger = Logger.getLogger("com.openbravo.pos.sales.JPanelButtons");
+    private static final Logger logger = Logger.getLogger("com.openbravo.pos.sales.JPanelButtons");
 
     private static SAXParser m_sp = null;
-    
-    private Properties props;
+
     private Map<String, String> events;
     
     private ThumbNailBuilder tnbmacro;
@@ -59,7 +57,7 @@ public class JPanelButtons extends javax.swing.JPanel {
     private JPanelTicket panelticket;
     
     /** Creates new form JPanelButtons */
-    public JPanelButtons(String sConfigKey, JPanelTicket panelticket) {
+    public JPanelButtons(String sConfigRes, JPanelTicket panelticket) {
         initComponents();
         
         // Load categories default thumbnail
@@ -67,11 +65,7 @@ public class JPanelButtons extends javax.swing.JPanel {
         
         this.panelticket = panelticket;
         
-        props = new Properties();
-        events = new HashMap<String, String>();
-        
-        String sConfigRes = panelticket.getResourceAsXML(sConfigKey);
-        
+        events = new HashMap<String, String>();        
         if (sConfigRes != null) {
             try {
                 if (m_sp == null) {
@@ -100,14 +94,6 @@ public class JPanelButtons extends javax.swing.JPanel {
                 c.setEnabled(user.hasPermission(c.getName()));
             }
         }
-    }
-    
-    public String getProperty(String key) {
-        return props.getProperty(key);
-    }
-    
-     public String getProperty(String key, String defaultvalue) {
-        return props.getProperty(key, defaultvalue);
     }
      
     public String getEvent(String key) {
@@ -158,11 +144,6 @@ public class JPanelButtons extends javax.swing.JPanel {
                 
             } else if ("event".equals(qName)) {
                 events.put(attributes.getValue("key"), attributes.getValue("code"));
-            } else {
-                String value = attributes.getValue("value");
-                if (value != null) {                  
-                    props.setProperty(qName, attributes.getValue("value"));
-                }
             }
         }      
         @Override

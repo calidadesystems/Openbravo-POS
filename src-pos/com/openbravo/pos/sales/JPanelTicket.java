@@ -118,6 +118,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
     
 //    private ScriptObject scriptobjinst;
     protected JPanelButtons m_jbtnconfig;
+    protected PropertiesConfig panelconfig;
     
     protected AppView m_App;
     protected DataLogicSystem dlSystem;
@@ -155,7 +156,10 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         m_TTP = new TicketParser(m_App.getDeviceTicket(), dlSystem);
                
         // Los botones configurables...
-        m_jbtnconfig = new JPanelButtons("Ticket.Buttons", this);
+
+        String sConfigRes = dlSystem.getResourceAsXML("Ticket.Buttons");
+        m_jbtnconfig = new JPanelButtons(sConfigRes, this);
+        panelconfig = new PropertiesConfig(sConfigRes);
         m_jButtonsExt.add(m_jbtnconfig);           
        
         // El panel de los productos o de las lineas...        
@@ -191,7 +195,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         paymentdialogrefund.init(m_App);
         
         // impuestos incluidos seleccionado ?
-        m_jaddtax.setSelected("true".equals(m_jbtnconfig.getProperty("taxesincluded")));
+        m_jaddtax.setSelected("true".equals(panelconfig.getProperty("taxesincluded")));
 
         // Inicializamos el combo de los impuestos.
         java.util.List<TaxInfo> taxlist = senttax.list();
@@ -202,7 +206,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
         taxcategoriesmodel = new ComboBoxValModel(taxcategorieslist);
         m_jTax.setModel(taxcategoriesmodel);
 
-        String taxesid = m_jbtnconfig.getProperty("taxcategoryid");
+        String taxesid = panelconfig.getProperty("taxcategoryid");
         if (taxesid == null) {
             if (m_jTax.getItemCount() > 0) {
                 m_jTax.setSelectedIndex(0);
@@ -877,7 +881,7 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
                     JPaymentSelect paymentdialog = ticket.getTicketType() == TicketInfo.RECEIPT_NORMAL
                             ? paymentdialogreceipt
                             : paymentdialogrefund;
-                    paymentdialog.setPrintSelected("true".equals(m_jbtnconfig.getProperty("printselected", "true")));
+                    paymentdialog.setPrintSelected("true".equals(panelconfig.getProperty("printselected", "true")));
 
                     paymentdialog.setTransactionID(ticket.getTransactionID());
 
@@ -1068,10 +1072,6 @@ public abstract class JPanelTicket extends JPanel implements JPanelView, BeanFac
             ScriptObject scr = new ScriptObject(ticket, ticketext);
             return evalScript(scr, resource, args);
         }
-    }
-    
-    public String getResourceAsXML(String sresourcename) {
-        return dlSystem.getResourceAsXML(sresourcename);
     }
 
     public BufferedImage getResourceAsImage(String sresourcename) {
