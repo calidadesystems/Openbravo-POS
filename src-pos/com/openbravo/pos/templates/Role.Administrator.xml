@@ -86,10 +86,6 @@
     <class name="/com/openbravo/reports/people.bs"/>
     <class name="com.openbravo.possync.ProductsSyncCreate"/>
     <class name="com.openbravo.possync.OrdersSyncCreate"/>
-    <class name="com.openbravo.sync.panel.ConfigureERP"/>
-    <class name="com.openbravo.sync.panel.Preview"/>
-    <class name="com.openbravo.sync.process.ProductsSyncCreate"/>
-    <class name="com.openbravo.sync.process.OrdersSyncCreate"/>
     <class name="Menu.ChangePassword"/>
     <class name="com.openbravo.pos.panels.JPanelPrinter"/>
     <class name="com.openbravo.pos.config.JPanelConfiguration"/>
